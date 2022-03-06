@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/layui.css"  media="all">
+    <script src="../layui.js" charset="utf-8"></script>
+    <script src="../jquery-3.6.0.js" charset="utf-8"></script>
+    <script src="../config/config.js" charset="utf-8"></script>
+</head>
+<body>
+
+    <script id="header" type="text/html">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>{{ d.name }}</legend>
+        </fieldset>
+        <table class="layui-hide" id="{{ d.name }}"></table>
+    </script>
+
+    <div id="view"></div>
+
+    <script type="text/html" id="titleTpl">
+        <a href="{{d.titleURL}}" class="layui-table-link" target="_blank">{{d.title}}</a>
+    </script>
+    <script>
+        $.get({
+            url:'http://' + ip + ':' + port + '/nfh/site',
+            success:function(data){
+                console.log(data.data)
+                var getTpl = header.innerHTML
+                var view = document.getElementById('view');
+                layui.each(data.data, function (index, item) {
+                    layui.laytpl(getTpl).render(item, function(html){
+                        view.innerHTML += html;
+                    });
+                    layui.use('table', function(){
+                        var table = layui.table;
+
+                        table.render({
+                            elem: '#' + item.name
+                            ,url:'http://' + ip + ':' + port + '/nfh/topics/' + item.name
+                            ,cols: [[
+                                {templet: '#titleTpl', align:'center', title:'主题'}
+                                ,{field:'modulo', templet: '#siteTpl', align:'center', title:'模块'}
+                            ]]
+                        });
+                    });
+                })
+            }
+        })
+    </script>
+</body>
+</html>

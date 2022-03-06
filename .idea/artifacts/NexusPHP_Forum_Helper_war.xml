@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="NexusPHP_Forum_Helper:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/NexusPHP_Forum_Helper_war</output-path>
+    <root id="archive" name="NexusPHP_Forum_Helper_war.war">
+      <element id="artifact" artifact-name="NexusPHP_Forum_Helper:war exploded" />
+    </root>
+  </artifact>
+</component>
