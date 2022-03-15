@@ -2,4 +2,7 @@
 /target/
 /out/
 
-/*.ini
+*.imi
+
+/src/test/
+/logs/

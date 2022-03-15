@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jwz.mapper.SiteMapper">
+    <select id="getSites" resultType="com.jwz.pojo.Site">
+        select * from nfh.site;
+    </select>
+
+    <select id="getSite" resultType="com.jwz.pojo.Site" parameterType="String">
+        select * from nfh.site where name = #{name};
+    </select>
+
+    <insert id="insertSite" parameterType="com.jwz.pojo.Site">
+        insert into nfh.site (name, url, cookie) values (#{name}, #{url}, #{cookie});
+    </insert>
+
+    <delete id="deleteSite" parameterType="String">
+        delete from nfh.site where name = #{name};
+    </delete>
+
+    <update id="updateSite" parameterType="com.jwz.pojo.Site">
+        update nfh.site set url = #{url}, cookie = #{cookie} where name = #{name};
+    </update>
+</mapper>
