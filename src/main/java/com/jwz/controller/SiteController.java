@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.List;
 
 @RestController
@@ -63,5 +66,29 @@ public class SiteController {
             return "fail!";
         }
         return "success";
+    }
+
+    @RequestMapping(value = "/site/backup", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public String backup(HttpServletResponse response , HttpServletRequest request) throws IOException {
+        String fileName = "config.json";
+
+        response.reset();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition", "attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
+
+        List<Site> sites = new SiteServiceImplSQL().getAllSites();
+        String config = JSON.toJSONString(sites);
+        StringReader reader = new StringReader(config);
+
+        int buff;
+        OutputStream out = response.getOutputStream();
+        while((buff = reader.read())!= -1){
+            out.write(buff);
+            out.flush();
+        }
+        out.close();
+
+        return null;
     }
 }

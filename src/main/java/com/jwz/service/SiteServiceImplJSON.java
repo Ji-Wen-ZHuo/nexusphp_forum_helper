@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class SiteServiceImplJSON implements SiteService{
     public List<Site> getAllSites() {
         List<Site> sites = new ArrayList<>();

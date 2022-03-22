@@ -8,19 +8,19 @@
     <script src="../config/config.js" charset="utf-8"></script>
 </head>
 <body>
+    <div id="view" style="padding: 15px;"></div>
 
-    <script id="header" type="text/html">
+    <script type="text/html" id="header">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>{{ d.name }}</legend>
         </fieldset>
         <table class="layui-hide" id="{{ d.name }}"></table>
     </script>
 
-    <div id="view"></div>
-
     <script type="text/html" id="titleTpl">
         <a href="{{d.titleURL}}" class="layui-table-link" target="_blank">{{d.title}}</a>
     </script>
+
     <script>
         $.get({
             url:'http://' + ip + ':' + port + '/nfh/site',
