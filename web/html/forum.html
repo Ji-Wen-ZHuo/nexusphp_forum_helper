@@ -32,17 +32,13 @@
                     layui.laytpl(getTpl).render(item, function(html){
                         view.innerHTML += html;
                     });
-                    layui.use('table', function(){
-                        var table = layui.table;
-
-                        table.render({
-                            elem: '#' + item.name
-                            ,url:'http://' + ip + ':' + port + '/nfh/topics/' + item.name
-                            ,cols: [[
-                                {templet: '#titleTpl', align:'center', title:'主题'}
-                                ,{field:'modulo', templet: '#siteTpl', align:'center', title:'模块'}
-                            ]]
-                        });
+                    layui.table.render({
+                        elem: '#' + item.name
+                        ,url:'http://' + ip + ':' + port + '/nfh/topics/' + item.name
+                        ,cols: [[
+                            {templet: '#titleTpl', align:'center', title:'主题'}
+                            ,{field:'modulo', templet: '#siteTpl', align:'center', title:'模块'}
+                        ]]
                     });
                 })
             }

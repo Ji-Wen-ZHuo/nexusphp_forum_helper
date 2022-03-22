@@ -20,7 +20,7 @@
             <legend>添加站点</legend>
         </fieldset>
 
-        <form class="layui-form">
+        <div class="layui-form">
             <div class="layui-form-item">
                 <label class="layui-form-label">站点名称</label>
                 <div class="layui-input-block">
@@ -39,7 +39,7 @@
                     <input type="text" name="cookie" lay-verify="cookie" autocomplete="off" placeholder="" class="layui-input">
                 </div>
             </div>
-        </form>
+        </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" onclick="addSite()">提交</button>
@@ -66,7 +66,7 @@
     <script>
         layui.table.render({
             elem: '#site'
-            ,url:'http://' + ip + ':' + port + '/nfh/site'
+            ,url: 'http://' + ip + ':' + port + '/nfh/site'
             ,cols: [[
                 {field:'name', width:140, align:'center', title:'网站名称'}
                 ,{field:'url', templet: '#siteTpl', align:'center', title:'网站地址'}
@@ -77,12 +77,12 @@
 
         layui.upload.render({
             elem: '#upload'
-            ,url: '' //此处配置你自己的上传接口即可
+            ,url: 'http://' + ip + ':' + port + '/nfh/site/recover' //此处配置你自己的上传接口即可
             ,accept: 'file' //普通文件
             ,exts: 'json' //只允许上传压缩文件
             ,done: function(res){
                 layer.msg('上传成功');
-                console.log(res);
+                window.location.reload();
             }
         });
 
@@ -122,9 +122,6 @@
                     layer.msg("备份成功");
                 }
             );
-        }
-
-        function recover() {
         }
     </script>
 </body>
