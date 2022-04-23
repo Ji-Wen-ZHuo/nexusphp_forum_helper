@@ -2,4 +2,6 @@
 /target/
 /out/
 
-/*.ini
+/*.iml
+
+/src/test/
